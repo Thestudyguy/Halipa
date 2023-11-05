@@ -17,7 +17,7 @@
 		}
 		///////////////
 
-		//use for MySQLi Procedural
+		//use for MySQLi Procedural boi we are using PDO 
 		// if(mysqli_query($conn, $sql)){
 		// 	$_SESSION['success'] = 'Member added successfully';
 		// }

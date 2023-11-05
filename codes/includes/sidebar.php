@@ -144,7 +144,3 @@ foreach ($results as $row) {
   </div><!-- .menubar-scroll -->
   
 </aside>
-<?php
-var_dump($_SESSION['access']);
-
-?>

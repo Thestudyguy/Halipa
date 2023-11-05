@@ -10,12 +10,12 @@ if (strlen($_SESSION['damsid']) == 0) {
         $patient_id = $_POST['patient_id'];
     $tools = $_POST['tools'];
     $tool_quantities = $_POST['tool_quantity'];
-    $services = isset($_POST['services']) ? $_POST['services'] : [];
+    $services = isset($_POST['services']) ? $_POST['services'] : []; //array for multiple tools 
     $randomID = rand(100000, 999999);
     $patientName = $_POST['patientName'];
     $currentDate = date("Y-m-d");
     $dueDate = date("Y-m-d", strtotime($currentDate . " + 7 days"));
-    $defaultStatus = "Pending";
+    $defaultStatus = "Paid";
 try {
     $dbh->beginTransaction();
 foreach ($tools as $tool_id) {
@@ -58,7 +58,7 @@ $serviceString = implode(",", $services); // Convert services array to comma-sep
 $queryInsertInvoice->bindParam(':service', $serviceString, PDO::PARAM_STR);
 $queryInsertInvoice->bindParam(':status', $defaultStatus, PDO::PARAM_STR);
 $queryInsertInvoice->execute();
-//insert into sales_report table
+//insert into sales_report table for sales statistics and report
 $sqlInsertSalesReport = "INSERT INTO sales_report (ID, Date, Name, Service) 
 VALUES (:randomID, :date, :patientName, :service)";
 $queryInsertSalesReport = $dbh->prepare($sqlInsertSalesReport);

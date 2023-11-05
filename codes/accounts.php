@@ -22,6 +22,7 @@ if (strlen($_SESSION['damsid']==0)) {
 	<link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
 	<!-- build:css assets/css/app.min.css -->
+	
 	<link rel="stylesheet" href="libs/bower/animate.css/animate.min.css">
 	<link rel="stylesheet" href="libs/bower/fullcalendar/dist/fullcalendar.min.css">
 	<link rel="stylesheet" href="libs/bower/perfect-scrollbar/css/perfect-scrollbar.css">

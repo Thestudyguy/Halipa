@@ -7,14 +7,12 @@ if (strlen($_SESSION['damsid']==0)) {
   } else{
 
 	//if (isset($_POST['markPaid']) && isset($_POST['invoiceNumber'])) {
-	//	// Update the status to "Paid" in the database based on $_POST['invoiceNumber']
 	//
 	//	$invoiceNumber = $_POST['invoiceNumber'];
 	//	$updateSql = "UPDATE invoice SET Status = 'Paid' WHERE InvoiceNumber = :invoiceNumber";
 	//	$updateQuery = $dbh->prepare($updateSql);
 	//	$updateQuery->bindParam(':invoiceNumber', $invoiceNumber, PDO::PARAM_INT);
 	//	if ($updateQuery->execute()) {
-	//		// Get the patient name and service from the invoice table
 	//		$selectSql = "SELECT PatientName, Service FROM invoice WHERE InvoiceNumber = :invoiceNumber";
 	//		$selectQuery = $dbh->prepare($selectSql);
 	//		$selectQuery->bindParam(':invoiceNumber', $invoiceNumber, PDO::PARAM_INT);
@@ -33,11 +31,9 @@ if (strlen($_SESSION['damsid']==0)) {
 	//			$insertQuery->bindParam(':service', $service, PDO::PARAM_STR);
 	//
 	//			if ($insertQuery->execute()) {
-	//				// Redirect back to the invoice page after updating the status and inserting into sales_report
 	//				header('Location: invoice.php');
 	//				exit();
 	//			} else {
-	//				// Handle the error (e.g., show an error message)
 	//				echo "Failed to insert data into sales_report table.";
 	//			}
 	//		} else {

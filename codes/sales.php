@@ -81,8 +81,8 @@ if (strlen($_SESSION['damsid']==0)) {
        <div class="col-md-6"> 
            <div class="panel">
                <div class="panel-header"></div>
-                   <div class="panel-body ">  
-                        <div class="row">
+                   <div class="panel-body " >  
+                        <div class="row"  style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                          <div class="col-sm-6 search1 ">
                            <label class="col-sm-5">Date From:</label>
                            <div class="col-sm-9">
@@ -96,7 +96,7 @@ if (strlen($_SESSION['damsid']==0)) {
                            </div>
                          </div>
                        </div>   
-                        <div class="row">
+                        <div class="row"  style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                          <div class="col-sm-6 search1">
                            <label class="col-sm-5">Date To:</label>
                            <div class="col-sm-9">
@@ -157,11 +157,11 @@ if(isset($_POST['submit'])) {
     // Check if both date fields are not empty
     if (!empty($dateFrom) && !empty($dateTo)) {
         // Query to retrieve data within the selected date range and join with services table
-        $sql = "SELECT sv.servicename, sv.price, COUNT(sr.Service) AS totalPatients, SUM(sv.price) AS totalSales
-                FROM sales_report sr
-                INNER JOIN services sv ON sr.Service = sv.id
-                WHERE sr.Date BETWEEN '$dateFrom' AND '$dateTo'
-                GROUP BY sr.Service";
+        $sql = "SELECT sv.servicename, sv.price, COUNT(DISTINCT sr.ID) AS totalPatients, SUM(sv.price) AS totalSales
+        FROM sales_report sr
+        INNER JOIN services sv ON sr.Service = sv.id
+        WHERE sr.Date BETWEEN '$dateFrom' AND '$dateTo'
+        GROUP BY sr.Service";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

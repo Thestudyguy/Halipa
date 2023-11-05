@@ -274,7 +274,6 @@ $("#doctorlist").html(data);
 
                                             <div class="col-lg-6 col-12">
                                             <input type="time" name="time" id="time" value="" class="form-control">
-                                            
                                         </div>
 
     <div class="col-lg-6 col-12">

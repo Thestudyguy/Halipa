@@ -3,7 +3,6 @@
 session_start();
 error_reporting(0);
 $eid = $_SESSION['damsid'];
-
 $sql = "SELECT FullName, Email, Access FROM tbldoctor WHERE ID=:eid";
 $query = $dbh->prepare($sql);
 $query->bindParam(':eid', $eid, PDO::PARAM_STR);

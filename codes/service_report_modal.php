@@ -638,59 +638,65 @@
     </thead>
     <tbody>
         <?php
-       $sql2 = "SELECT s.servicename AS Service,
-       s.price AS Price,
-       COALESCE(SUM(s.price), 0) AS TotalSales,
-       COALESCE(COUNT(*), 0) AS TotalPatients
-   FROM services s
-   LEFT JOIN invoice i ON i.Service = s.id
-   GROUP BY s.id";
+      $sql2 = "SELECT
+      s.servicename AS Service,
+      s.price AS Price,
+      COUNT(DISTINCT i.InvoiceNumber) AS TotalPatients,
+      SUM(s.price) AS TotalSales
+  FROM
+      services s
+  LEFT JOIN
+      invoice i ON i.Service = s.id
+  GROUP BY
+      s.id, s.servicename, s.price";
+  
+  $query2 = $dbh->prepare($sql2);
+  $query2->execute();
+  $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
+  $totalInvoiceSales = 0;
+$totalPatients = 0;
+$totalPatientSales = 0;
 
-        $query2 = $dbh->prepare($sql2);
-        $query2->execute();
-        $results2 = $query2->fetchAll(PDO::FETCH_OBJ);
-        $totalInvoiceSales = 0;
-        $totalPatients = 0;
+foreach ($results2 as $row2) {
+    $totalPatients += $row2->TotalPatients;
+    $totalInvoiceSales += $row2->TotalSales;
 
-        foreach ($results2 as $row2) {
-            $totalSales += $row2->TotalSales;
-            $totalInvoiceSales += $row2->TotalSales;
-            $totalPatients += $row2->TotalPatients;
-            ?>
-            <tr>
-                <td><?php echo htmlentities($row2->Service); ?></td>
-                <td><?php echo htmlentities(number_format($row2->Price)); ?></td>
-                <td><?php echo htmlentities($row2->TotalPatients); ?></td>
-                <td><?php echo htmlentities(number_format($row2->TotalSales)); ?></td>
-            </tr>
-            <?php
-        }
+    if ($row2->TotalPatients > 0) {
+        $totalPatientSales += $row2->TotalSales;
+    }
+    ?>
+    <tr>
+        <td><?php echo htmlentities($row2->Service); ?></td>
+        <td><?php echo number_format($row2->Price); ?></td>
+        <td><?php echo $row2->TotalPatients; ?></td>
+        <td><?php echo number_format($row2->TotalSales); ?></td>
+    </tr>
+    <?php
+}
 
-        if (empty($results2)) {
-            ?>
-            <tr>
-                <td colspan="4">No data available</td>
-            </tr>
-            <?php
-        }
-        ?>
-   
-        <tr>
-            <td colspan="3" style="text-align: left;"><strong>Total Invoice Sales:</strong></td>
-            <td><strong><?php echo htmlentities(number_format($totalInvoiceSales)); ?></strong></td>
-        </tr>
-    </tbody>
+if (empty($results2)) {
+    ?>
+    <tr>
+        <td colspan="4">No data available</td>
+    </tr>
+    <?php
+}
+?>
+
+<!-- <tr>
+    <td colspan="3" style="text-align: left;"><strong>Total Invoice Sales:</strong></td>
+    <td><strong></strong></td>
+</tr> -->
+
+</tbody>
 </table>
-
-                    </div>
-                    
 </div>
-<div class="total-sales">
-<hr>
+<hr> <!-- Added a horizontal rule here -->
+
 <table class="table table-bordered">
 <tr>
     <td colspan="3" style="text-align: left;"><strong>Total Sales:</strong></td>
-    <td> <strong><?php echo htmlentities(number_format($totalSales + $totalPatientSales)); ?></strong> </td>
+    <td> <strong><?php echo number_format($totalPatientSales); ?></strong> </td>
 </tr>
 </table>
                 </div>

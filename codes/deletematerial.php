@@ -50,7 +50,6 @@ if (isset($_GET['action']) && isset($_GET['id'])) {
         exit();
     }
 }
-
 // If the action or id is not set or there was an error, redirect back to inventory.php with an error message
 $_SESSION['error'] = "Error occurred during deletion.";
 header("Location: inventory.php");
