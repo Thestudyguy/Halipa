@@ -74,12 +74,12 @@ if (strlen($_SESSION['damsid']==0)) {
             $mail->Host = 'smtp.gmail.com';
             $mail->Port = 587;
             $mail->SMTPAuth = true;
-            $mail->Username = 'lagrosaedrian06@gmail.com';
-            $mail->Password = 'n b i c v n x x m k m i e a q h'; // auto-generated password for email if mag ilis ug email need i configure ang gamiton na email
+            $mail->Username = 'delossantos.jhonlurym@dnsc.edu.ph';
+            $mail->Password = 'gaek felu jfzb pbhl'; // auto-generated password for email if mag ilis ug email need i configure ang gamiton na email
             $mail->SMTPSecure = 'tls';
         
             // Email content
-            $mail->setFrom('lagrosaedrian06@gmail.com', 'Halipa Dental Clinic Website');
+            $mail->setFrom('delossantos.jhonlurym@dnsc.edu.ph', 'Halipa Dental Clinic Website');
             $mail->addAddress($email, $patientName);
             $mail->Subject = 'Appointment Status Update';
             $mail->Body = 'Dear ' . $patientName . ', your appointment has been ' . $status . '.' . "\n\n" . $message;
@@ -251,7 +251,7 @@ if ($status=="" ){
      <tr>
     <th>Remark :</th>
     <td>
-    <select name="remark" placeholder="Remark" rows="12" cols="14" class="form-control wd-450" required="true">
+    <select name="remark" placeholder="Remark" rows="12" cols="14" class="form-control" required="true" style="overflow-x: hidden">
       <option value="" hidden >Select Remark</option>
       <option value="Approved Appointment">Approved Appointment</option>
       <option value="Decline Appointment">Decline Appointment</option>
@@ -262,7 +262,7 @@ if ($status=="" ){
     <th>Status :</th>
     <td>
 
-   <select name="status" class="form-control wd-450" required="true" >
+   <select name="status" class="form-control" required="true">
    <option value="" hidden >Select Status</option>
      <option value="Approved">Approved</option>
      <option value="Decline">Decline</option>

@@ -5,12 +5,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="editModalLabel-<?php echo $row['Email']; ?>">Edit Entry</h4>
+                   <center><h4 class="modal-title" id="editModalLabel-<?php echo $row['Email']; ?>">Edit Account</h4></center> 
                 </div>
                 <div class="modal-body">
                     <!-- Input fields inside the modal -->
-                    <form method="POST" action="accountEdit.php">
-                      <legend><strong><?php echo $row['FullName']; ?></strong></legend>
+                    <center><form method="POST" action="accountEdit.php">
+                      <legend><strong><?php echo $row['FullName']; ?></strong></legend></center>
     <div class="form-group">
         <input type="hidden" name="ID" value="<?php echo $row['ID']; ?>">
         <label for="fullName">Full Name:</label>
@@ -37,9 +37,9 @@
         </select>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" name="submit" class="btn btn-primary">Save</button>
-    </div>
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <button type="submit" name="edit" class="btn btn-success"><span class="glyphicon glyphicon-check"></span> Update</button>
+</div>
 </form>
                 </div>
             </div>
@@ -52,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <center><h4 class="modal-title" id="myModalLabel">Delete Patient Record</h4></center>
+                <center><h4 class="modal-title" id="myModalLabel">Delete Account Record</h4></center>
             </div>
             <div class="modal-body">	
             	<p class="text-center">Are you sure you want to Delete</p>

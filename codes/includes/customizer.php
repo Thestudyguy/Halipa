@@ -1,4 +1,4 @@
-  <!-- APP CUSTOMIZER
+  <!-- APP CUSTOMIZER-->
   <div id="app-customizer" class="app-customizer">
     <a href="javascript:void(0)" 
       class="app-customizer-toggle theme-color" 
@@ -8,12 +8,12 @@
       data-target="#app-customizer">
       <i class="fa fa-gear"></i>
     </a>
-    <div class="customizer-tabs"> -->
-      <!-- tabs list 
+    <div class="customizer-tabs"> 
+      <!-- tabs list -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#menubar-customizer" aria-controls="menubar-customizer" role="tab" data-toggle="tab">Menubar</a></li>
-        <li role="presentation"><a href="#navbar-customizer" aria-controls="navbar-customizer" role="tab" data-toggle="tab">Navbar</a></li>-->
-      </ul><!-- .nav-tabs 
+        <li role="presentation"><a href="#navbar-customizer" aria-controls="navbar-customizer" role="tab" data-toggle="tab">Navbar</a></li>
+      </ul><!-- .nav-tabs -->
 
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane in active fade" id="menubar-customizer">
@@ -34,9 +34,9 @@
           <div class="radio radio-inverse m-b-md">
             <input type="radio" id="menubar-dark-theme" name="menubar-theme" data-toggle="menubar-theme" data-theme="dark">
             <label for="menubar-dark-theme">Dark</label>
-          </div>-->
-        </div><!-- .tab-pane
-        <div role="tabpanel" class="tab-pane fade" id="navbar-customizer"> -->
+          </div>
+        </div><!-- .tab-pane-->
+        <div role="tabpanel" class="tab-pane fade" id="navbar-customizer">
           <!-- This Section is populated Automatically By javascript -->
         </div><!-- .tab-pane -->
       </div>

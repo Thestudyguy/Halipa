@@ -155,12 +155,12 @@ if (strlen($_SESSION['damsid']==0)) {
 						<th>Service</th>
 						<th>Price</th>
 						<th>Print</th>
-                        <th>Action</th>
-						
+                        <th>Edit</th>
+						<th>Delete</th>
 					</thead>
 					<tbody>
 					<?php
-$sql = "SELECT i.InvoiceNumber, i.InvoiceDate, i.InvoiceDueDate, i.PatientName, i.Status, s.Specialization, srv.Price
+$sql = "SELECT i.InvoiceNumber, i.InvoiceDate, i.InvoiceDueDate, i.PatientName, s.Specialization, srv.Price
 FROM invoice i
 INNER JOIN tblspecialization s ON i.Service = s.ID
 INNER JOIN services srv ON i.Service = srv.ID;";
@@ -180,12 +180,13 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
             echo "<td>
 			<form method='post' action='invoicePDF.php' target='_blank'>
 			<input type='hidden' name='data' value='" . htmlentities(json_encode($row)) . "'>
-			<button type='submit' class='btn btn-primary status-btn'>Generate PDF</button>
+			<center><button type='submit' class='btn btn-primary status-btn btn-sm'>Generate PDF</button></center>
 		</form>
                   </td>";
             echo "<td>
-                    <button class='btn btn-success' data-toggle='modal' data-target='#edit_" . $row['InvoiceNumber'] . "' href='#edit_" . $row['InvoiceNumber'] . "'><span class='glyphicon glyphicon-edit'></span>Edit</button>
-                    <button data-toggle='modal' data-target='#delete_" . $row['InvoiceNumber'] . "' href='#delete_" . $row['InvoiceNumber'] . "' class='btn btn-danger'><span class='glyphicon glyphicon-trash'></span>Delete</button>
+			<center><button class='btn btn-success btn-sm' data-toggle='modal' data-target='#edit_" . $row['InvoiceNumber'] . "' href='#edit_" . $row['InvoiceNumber'] . "'><span class='glyphicon glyphicon-edit'></span> Edit</button></center>
+				<td>
+			<center><button data-toggle='modal' data-target='#delete_" . $row['InvoiceNumber'] . "' href='#delete_" . $row['InvoiceNumber'] . "' class='btn btn-danger btn-sm'><span class='glyphicon glyphicon-trash'></span> Delete</button></center>
                   </td>";
             echo "</tr>";
             include("deleteInvoiceModal.php");

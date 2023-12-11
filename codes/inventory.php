@@ -120,8 +120,8 @@ if (strlen($_SESSION['damsid']==0)) {
 			?>
 			<div class="row1 ">
 			<?php if ($isAdminUser) : ?>
-					<a href="#addnew" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New</a>
-					<a href="history.php" class="btn btn-success"><span class=""></span>Material Logs</a>
+					<a href="#addnew" data-toggle="modal" class="btn btn-primary"><span></span> New</a>
+					<a href="history.php" class="btn btn-primary"><span class=""></span>Material Logs</a>
         				<?php endif; ?>
 				
 				
@@ -138,7 +138,9 @@ if (strlen($_SESSION['damsid']==0)) {
 						<th>Expiration date</th>
 						<th>Status</th>
                         <?php if ($isAdminUser) : ?>
-							<th>Action</th>
+						<th>Edit</th>
+						<th>Delete</th>
+						<th>Expired</th>
         				<?php endif; ?>
 						
 						
@@ -165,7 +167,7 @@ while ($row = $query->fetch_assoc()) {
     } elseif ($isZeroQuantity) {
         $status = "Out of Stock";
     } else {
-        $status = "Active";
+        $status = "In Stock";
     }
 
     $expirationClass = $isExpired ? "blinking-red" : "";
@@ -181,9 +183,9 @@ while ($row = $query->fetch_assoc()) {
         
     if ($isAdminUser) {
         echo "<td>
-            <a href='#edit_" . $row['id'] . "' class='btn btn-success btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-edit'></span> Edit</a>
-            <a href='#delete_" . $row['id'] . "' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Delete</a>
-            <a href='#mark_as_expired_" . $row['id'] . "' class='btn btn-info btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Mark as Expired</a>
+            <center><a href='#edit_" . $row['id'] . "' class='btn btn-success btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-edit'></span> Edit</a></center>
+			<td> <center> <a href='#delete_" . $row['id'] . "' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Delete</a></center>
+			<td> <center><a href='#mark_as_expired_" . $row['id'] . "' class='btn btn-info btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-exclamation-sign'></span> Expired</a></center>
         </td>";
     }
     echo "</tr>";
@@ -247,12 +249,12 @@ include("edit_delete_modal_material.php");
                   <style>
 					 .zero-quantity {
         			color: black;
-        			font-weight: bold;
-					font-size: 20px;
+        			font-weight: 600;
+					font-size: ;
     }
 					.blinking-red {
-					font-size: 20px;
-					font-weight: 900;
+					font-size: ;
+					font-weight: 600;
 					color: red;
 					animation: blink .5s infinite;
 }	

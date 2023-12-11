@@ -68,8 +68,8 @@ if (strlen($_SESSION['damsid']==0)) {
 										<th>Date</th>
 										<th>Time</th>
 										<th>Service</th>
-									<th>Status</th>
-										<th>Action</th>
+										<th>Status</th>
+										<th>View</th>
 										
 									</tr>
 								</thead>
@@ -107,7 +107,7 @@ foreach($results as $row)
                   </td>
                   <?php } ?>             
                  
-										<td><a href="view-appointment-detail.php?editid=<?php echo htmlentities ($row->ID);?>&&aptid=<?php echo htmlentities ($row->AppointmentNumber);?>" class="btn btn-primary">View</a>
+										<td><center><a href="view-appointment-detail.php?editid=<?php echo htmlentities ($row->ID);?>&&aptid=<?php echo htmlentities ($row->AppointmentNumber);?>" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-search'></span> View</a>
 										
 									</tr>
 								 <?php $cnt=$cnt+1;}} ?> 

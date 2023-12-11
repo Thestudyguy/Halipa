@@ -108,8 +108,8 @@ $newAppointmentsCount = $result['new_appointments'];
               <div class="notification-icon"><span></span></div>
               <div class="notification">
                <b style="color: #16161D;">new appointment</b>  <br>
-            from: '.$row['Name'].'
-            <br>at '.$row['AppointmentDate'].' - '.date('h:i A', strtotime($row['AppointmentTime'])).' 
+            '.$row['Name'].'
+            <br> '.$row['AppointmentDate'].' - '.date('h:i A', strtotime($row['AppointmentTime'])).' 
               </div>
             
             </div>';
@@ -166,10 +166,14 @@ foreach($results as $row)
         <li class="dropdown">
           <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="zmdi zmdi-hc-lg zmdi-settings"></i></a>
           <ul class="dropdown-menu animated flipInY">
-          
+          <?php if ($isAdminUser) : ?>
+             <li> <a href="accounts.php"><i class="zmdi m-r-md zmdi-hc-lg zmdi-accounts-add"></i>Accounts</a></li>
+              
+            <?php endif; ?>
             
             <li><a href="logout.php"><i class="zmdi m-r-md zmdi-hc-lg zmdi-sign-in"></i>Logout</a></li>
-            
+
+           
           </ul>
         </li>
 
@@ -190,10 +194,10 @@ foreach($results as $row)
   background-color: whitesmoke;
 }
 .notification-icon{
-  width:30px;
-  height:30px;
+  width:10px;
+  height:10px;
   border-radius: 50%;
-  background-color: yellow;
+  background-color: red;
 }
              
             </style>

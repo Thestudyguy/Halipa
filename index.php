@@ -1,43 +1,59 @@
 <?php
 session_start();
-//error_reporting(0);
 include('codes/includes/dbconnection.php');
-    if(isset($_POST['submit']))
-  {
- $name=$_POST['name'];
-  $mobnum=$_POST['phone'];
- $email=$_POST['email'];
- $appdate=$_POST['date'];
- $aaptime=$_POST['time'];
- $specialization=$_POST['specialization'];
- $message=$_POST['message'];
- $aptnumber=mt_rand(100000000, 999999999);
- $cdate=date('Y-m-d');
 
-if($appdate<=$cdate){
-       echo '<script>alert("Appointment date must be greater than todays date")</script>';
-} else {
-    $sql = "INSERT INTO tblappointment (AppointmentNumber, Name, MobileNumber, Email, AppointmentDate, AppointmentTime, Specialization, Message) VALUES (:aptnumber, :name, :mobnum, :email, :appdate, :aaptime, :specialization, :message)";
-    $query = $dbh->prepare($sql);
-    $query->bindParam(':aptnumber', $aptnumber, PDO::PARAM_STR);
-    $query->bindParam(':name', $name, PDO::PARAM_STR);
-    $query->bindParam(':mobnum', $mobnum, PDO::PARAM_STR);
-    $query->bindParam(':email', $email, PDO::PARAM_STR);
-    $query->bindParam(':appdate', $appdate, PDO::PARAM_STR);
-    $query->bindParam(':aaptime', $aaptime, PDO::PARAM_STR);
-    $query->bindParam(':specialization', $specialization, PDO::PARAM_STR);
-    $query->bindParam(':message', $message, PDO::PARAM_STR);
-    
-    $query->execute();
-    $LastInsertId = $dbh->lastInsertId();
-    
-    if ($LastInsertId > 0) {
-        echo '<script>alert("Your Appointment Request Has Been Sent. We Will Contact You Soon")</script>';
-        echo "<script>window.location.href ='index.php'</script>";
+if(isset($_POST['submit'])) {
+    $name = $_POST['name'];
+    $mobnum = $_POST['phone'];
+    $email = $_POST['email'];
+    $appdate = $_POST['date'];
+    $apptime = $_POST['time']; // Assuming time is in "H:mm AM/PM" format
+    $specialization = $_POST['specialization'];
+    $message = $_POST['message'];
+    $aptnumber = mt_rand(100000000, 999999999);
+    $cdate = date('Y-m-d');
+
+    if($appdate <= $cdate) {
+        echo '<script>alert("Appointment date must be greater than today\'s date")</script>';
     } else {
-        echo '<script>alert("Something Went Wrong. Please try again")</script>';
+        $formattedTime = date('H:i:s', strtotime($apptime));
+
+        $sqlCheckDuplicate = "SELECT * FROM tblappointment WHERE AppointmentDate = :appdate AND AppointmentTime = :apptime";
+        $stmtCheckDuplicate = $dbh->prepare($sqlCheckDuplicate);
+        $stmtCheckDuplicate->bindParam(':appdate', $appdate, PDO::PARAM_STR);
+        $stmtCheckDuplicate->bindParam(':apptime', $formattedTime, PDO::PARAM_STR);
+        $stmtCheckDuplicate->execute();
+
+        if ($stmtCheckDuplicate->rowCount() > 0) {
+            echo '<script>
+                    alert("Time selected for the date is currently occupied. Please select another time for the date");
+                 </script>';
+        } else {
+            $sqlInsert = "INSERT INTO tblappointment (AppointmentNumber, Name, MobileNumber, Email, AppointmentDate, AppointmentTime, Specialization, Message) VALUES (:aptnumber, :name, :mobnum, :email, :appdate, :apptime, :specialization, :message)";
+            $query = $dbh->prepare($sqlInsert);
+            $query->bindParam(':aptnumber', $aptnumber, PDO::PARAM_STR);
+            $query->bindParam(':name', $name, PDO::PARAM_STR);
+            $query->bindParam(':mobnum', $mobnum, PDO::PARAM_STR);
+            $query->bindParam(':email', $email, PDO::PARAM_STR);
+            $query->bindParam(':appdate', $appdate, PDO::PARAM_STR);
+            $query->bindParam(':apptime', $formattedTime, PDO::PARAM_STR);
+            $query->bindParam(':specialization', $specialization, PDO::PARAM_STR);
+            $query->bindParam(':message', $message, PDO::PARAM_STR);
+
+            $query->execute();
+            $lastInsertId = $dbh->lastInsertId();
+
+            if ($lastInsertId > 0) {
+                echo '<script>
+                        alert("Your Appointment Request Has Been Sent. We Will Contact You Soon");
+                        // Trigger your modal display code here
+                      </script>';
+                echo "<script>window.location.href ='index.php'</script>";
+            } else {
+                echo '<script>alert("Something Went Wrong. Please try again")</script>';
+            }
+        }
     }
-}
 }
 ?>
 <!doctype html>
@@ -149,7 +165,7 @@ $("#doctorlist").html(data);
             ?>
             <img src="images/<?php echo strtolower(str_replace(' ', '', $service['servicename'])); ?>.png" alt="">
             <h3><?php echo htmlentities($service['servicename']); ?></h3>
-            <h3>Price: ₱<?php echo number_format($service['price'], 2); ?></h3>
+            <p>Price: ₱<?php echo number_format($service['price'], 2); ?></p>
             <p><?php echo htmlentities($service['description']); ?></p>
         </div>
     <?php
@@ -272,9 +288,18 @@ $("#doctorlist").html(data);
                                             
                                         </div>
 
-                                            <div class="col-lg-6 col-12">
-                                            <input type="time" name="time" id="time" value="" class="form-control">
-                                            
+                                        <div class="col-lg-6 col-12">
+                                            <select name="time" id="" class="form-control">
+                                                <option value="" hidden selected>Select Time</option>
+                                                <option value="09:00 AM">9:00 AM</option>
+                                                <option value="10:00 AM">10:00 AM</option>
+                                                <option value="11:00 AM">11:00 AM</option>
+                                                <option value="12:00 PM">12:00 PM</option>
+                                                <option value="01:00 PM">1:00 PM</option>
+                                                <option value="02:00 PM">2:00 PM</option>
+                                                <option value="03:00 PM">3:00 PM</option>
+                                                <option value="04:00 PM">4:00 PM</option>
+                                            </select>
                                         </div>
 
     <div class="col-lg-6 col-12">
@@ -304,7 +329,6 @@ while($row =$stmt->fetch()) {
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
 
@@ -347,12 +371,17 @@ while($row =$stmt->fetch()) {
    </div>
 </section>
 </main>
+
 <!-- footer section end  -->
         <!-- JAVASCRIPT FILES -->
+        
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.bundle.min.js"></script>
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/scrollspy.min.js"></script>
         <script src="js/custom.js"></script>
+        
+
+
     </body>
 </html>

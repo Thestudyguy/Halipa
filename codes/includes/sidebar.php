@@ -49,11 +49,19 @@ foreach ($results as $row) {
                     <span class="m-r-xs"><i class="fa fa-home"></i></span>
                     <span>Home</span>
                   </a>
+                  <?php if ($isAdminUser) : ?>
+               <li>
+                <a class="text-color" href="accounts.php">
+                 <span class="m-r-xs"><i class="zmdi zmdi-accounts-add"></i></span>
+                 <span class="menu-text">Accounts</span>
+                </a>
+              </li>
+                 <?php endif; ?>
                 </li>
                 <li role="separator" class="divider"></li>
                 <li>
                   <a class="text-color" href="logout.php">
-                    <span class="m-r-xs"><i class="fa fa-power-off"></i></span>
+                    <span class="m-r-xs"><i class="zmdi zmdi-sign-in"></i></span>
                     <span>logout</span>
                   </a>
                 </li>
@@ -85,7 +93,7 @@ foreach ($results as $row) {
             <ul class="submenu">
               <li><a href="new-appointment.php"><span class="menu-text">New Appointment</span></a></li>
               <li><a href="approved-appointment.php"><span class="menu-text">Approved Appointment</span></a></li>
-              <li><a href="cancelled-appointment.php"><span class="menu-text">Cancelled Appointment</span></a></li>
+              <li><a href="cancelled-appointment.php"><span class="menu-text">Decline Appointment</span></a></li>
               <li><a href="all-appointment.php"><span class="menu-text">All Appointment</span></a></li>
               <li><a href="appointment-bwdates.php"><span class="menu-text">Appointment Report</span></a></li>
               <li><a href="search.php"><span class="menu-text">Search Appointment</span></a></li>
@@ -131,20 +139,13 @@ foreach ($results as $row) {
           </a>
         </li>
         <?php endif; ?>
-        <?php if ($isAdminUser) : ?>
-        <li>
-          <a href="accounts.php">
-          <i class="menu-icon zmdi zmdi-accounts-add zmdi-hc-lg"></i>
-            <span class="menu-text">Accounts</span>
-          </a>
-        </li>
-        <?php endif; ?>
+        
       </ul><!-- .app-menu -->
     </div><!-- .menubar-scroll-inner -->
   </div><!-- .menubar-scroll -->
   
 </aside>
 <?php
-var_dump($_SESSION['access']);
+
 
 ?>

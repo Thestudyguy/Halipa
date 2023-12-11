@@ -14,16 +14,16 @@ if (strlen($_SESSION['damsid']==0)) {
 	$query->execute();
 	$results = $query->fetchAll(PDO::FETCH_OBJ);
 	
-	$isAdminUser = false; // Initialize as false by default
+	$isAdminUser = false;
 	
 	foreach ($results as $row) {
 	  $email = $row->Email;
 	  $fname = $row->FullName;
-	  $access = $row->Access; // Assuming 'Access' field in tbldoctor holds the access level
+	  $access = $row->Access;
 	  
 	  if ($access === 'Admin Access') {
-		$isAdminUser = true; // Set to true if the user has admin access
-		break; // No need to continue the loop if we found admin access
+		$isAdminUser = true;
+		break;
 	  }
 	}
 
@@ -118,9 +118,9 @@ if (strlen($_SESSION['damsid']==0)) {
 					unset($_SESSION['success']);
 				}
 			?>
-			<div class="row">
+			<div class="row1">
 			<?php if ($isAdminUser) : ?>
-				<a href="#addnew" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New</a>
+				<a href="#addnew" data-toggle="modal" class="btn btn-primary"><span></span> New</a>
         				<?php endif; ?>
 				
 				
@@ -142,7 +142,11 @@ if (strlen($_SESSION['damsid']==0)) {
 						<th>Address</th>
 						<th>Occupation</th>
 						<th>Dental Insurance</th>
-							<th>Action</th>
+						<th>View</th>
+						<?php if ($isAdminUser) : ?>
+						<th>Edit</th>
+						<th>Delete</th>
+						<?php endif; ?>
 					</thead>
 							
                     <tbody>
@@ -173,9 +177,10 @@ if (strlen($_SESSION['damsid']==0)) {
 								
 									if ($isAdminUser) {
 										echo "
-												<a href='#edit_".$row['Patientid']."' class='btn btn-success btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-edit'></span> Edit</a>
-												<a href='#delete_".$row['Patientid']."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Delete</a>
-												<a href='view123.php?viewID=".$row['Patientid']."' class='btn btn-primary btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> View</a>
+										<a href='view123.php?viewID=".$row['Patientid']."' class='btn btn-primary btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-search'></span> View</a>
+										<td><a href='#edit_".$row['Patientid']."' class='btn btn-success btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-edit'></span> Edit</a>
+										<td><a href='#delete_".$row['Patientid']."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Delete</a>
+										
 										
 												";
 									} else {

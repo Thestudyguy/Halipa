@@ -1,11 +1,8 @@
 <?php
 session_start();
+include_once('db_connection.php');
 
-// Include the database connection file
-include('db_connection.php');
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
-    // Get the form data
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['edit'])) {
     $id = $_POST['ID'];
     $fullName = $_POST['editfullname'];
     $mobileNumber = $_POST['editNumber'];
@@ -13,28 +10,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit'])) {
     $password = $_POST['password'];
     $access = $_POST['editaccess'];
 
-    // Validate and sanitize the input data (you should add proper validation and sanitization here)
+    $sql = "UPDATE tbldoctor SET FullName = '$fullName', MobileNumber = '$mobileNumber', Email = '$email', Password = '$password', Access = '$access' WHERE ID = '$id'";
 
-    try {
-        // Update the doctor record in the database based on the provided data
-        $sql = "UPDATE tbldoctor SET FullName = ?, MobileNumber = ?, Email = ?, Password = ?, Access = ? WHERE ID = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param('sssssi', $fullName, $mobileNumber, $email, $password, $access, $id);
-        $stmt->execute();
-
-        // Set success message and redirect to a success page
+    if (mysqli_query($conn, $sql)) {
         $_SESSION['success'] = 'Doctor information updated successfully';
         header("Location: accounts.php");
         exit();
-    } catch (mysqli_sql_exception $e) {
-        // Handle database errors and show an error message
+    } else {
         $_SESSION['error'] = 'Something went wrong in updating doctor information';
-        die("Error: " . $e->getMessage());
+        die("Error: " . mysqli_error($conn));
     }
 }
 
-// If the script reaches here without redirection, there was no form submission.
-// Redirect back to the previous page or any other appropriate action.
 header("Location: accounts.php");
 exit();
 ?>

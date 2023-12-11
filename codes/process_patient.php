@@ -28,7 +28,6 @@ foreach ($tools as $tool_id) {
             $stmtDeductQuantity->bindParam(':tool_id', $tool_id, PDO::PARAM_INT);
             $stmtDeductQuantity->execute();
 
-            // Insert the selected tool with quantity and service into patient_tools table
             $sqlInsertTool = "INSERT INTO patient_tools (patient_tool_id, patient_id, tool_id, quantity, service, ID) 
             VALUES (NULL, :patient_id, :tool_id, :quantity, :service, :randomID)";
             $queryInsertTool = $dbh->prepare($sqlInsertTool);
@@ -36,27 +35,25 @@ foreach ($tools as $tool_id) {
             $queryInsertTool->bindParam(':tool_id', $tool_id, PDO::PARAM_INT);
             $queryInsertTool->bindParam(':quantity', $quantity, PDO::PARAM_INT);
 
-            // Convert the services array to a comma-separated string and bind it to the query
             $serviceString = implode(",", $services);
             $queryInsertTool->bindParam(':service', $serviceString, PDO::PARAM_STR);
 
-            // Use the same randomID for all records inserted within this loop
             $queryInsertTool->bindParam(':randomID', $randomID, PDO::PARAM_INT);
 
             $queryInsertTool->execute();
             
            
         }
-        $sqlInsertInvoice = "INSERT INTO invoice (InvoiceNumber, InvoiceDate, InvoiceDueDate, PatientName, Service, status) 
-        VALUES (:randomIDInvoice, :date, :dueDate, :patientName, :service, :status)";
+        $sqlInsertInvoice = "INSERT INTO invoice (InvoiceNumber, InvoiceDate, InvoiceDueDate, PatientName, Service) 
+        VALUES (:randomIDInvoice, :date, :dueDate, :patientName, :service)";
 $queryInsertInvoice = $dbh->prepare($sqlInsertInvoice);
 $queryInsertInvoice->bindParam(':randomIDInvoice', $randomIDInvoice, PDO::PARAM_INT);
 $queryInsertInvoice->bindParam(':date', $currentDate, PDO::PARAM_STR);
 $queryInsertInvoice->bindParam(':dueDate', $dueDate, PDO::PARAM_STR);
 $queryInsertInvoice->bindParam(':patientName', $patientName, PDO::PARAM_STR);
-$serviceString = implode(",", $services); // Convert services array to comma-separated string
+$serviceString = implode(",", $services);
 $queryInsertInvoice->bindParam(':service', $serviceString, PDO::PARAM_STR);
-$queryInsertInvoice->bindParam(':status', $defaultStatus, PDO::PARAM_STR);
+
 $queryInsertInvoice->execute();
 //insert into sales_report table
 $sqlInsertSalesReport = "INSERT INTO sales_report (ID, Date, Name, Service) 
@@ -69,7 +66,6 @@ $queryInsertSalesReport->bindParam(':service', $serviceString, PDO::PARAM_STR);
 $queryInsertSalesReport->execute();
         $dbh->commit();
 } catch (PDOException $e) {
-    //in case of an error
     $dbh->rollBack();
     echo "Error: " . $e->getMessage();
 }

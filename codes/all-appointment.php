@@ -92,8 +92,8 @@ if (strlen($_SESSION['damsid']==0)) {
 										<th>Time</th>
 										<th>Service</th>
 									<th>Status</th>
-										<th>Action</th>
-										
+										<th>View</th>
+										<th>Delete</th>
 									</tr>
 								</thead>
 							
@@ -137,9 +137,10 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
         </td>
 
         <td>
-            <a href="view-appointment-detail.php?editid=<?php echo $row['ID']; ?>&aptid=<?php echo $row['AppointmentNumber']; ?>" class="btn btn-primary">View</a>
-            <a href="#modal-<?php echo $row['AppointmentNumber']; ?>" name="AppointmentNumber" class="btn btn-danger delete-btn" data-toggle="modal" data-target="#modal-<?php echo $row['AppointmentNumber']; ?>">
-                <span class='glyphicon glyphicon-trash'></span>Delete
+           	<center><a href="view-appointment-detail.php?editid=<?php echo $row['ID']; ?>&aptid=<?php echo $row['AppointmentNumber']; ?>" class="btn btn-primary btn-sm" ><span class='glyphicon glyphicon-search'></span> View</a>
+		<td>    
+			<center><a href="#modal-<?php echo $row['AppointmentNumber']; ?>" name="AppointmentNumber" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal-<?php echo $row['AppointmentNumber']; ?>">
+                <span class='glyphicon glyphicon-trash'></span> Delete
             </a>
             <?php include('deleteappointment.php'); ?>
         </td>

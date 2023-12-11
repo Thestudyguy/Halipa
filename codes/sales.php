@@ -81,8 +81,8 @@ if (strlen($_SESSION['damsid']==0)) {
        <div class="col-md-6"> 
            <div class="panel">
                <div class="panel-header"></div>
-                   <div class="panel-body ">  
-                        <div class="row">
+                   <div class="panel-body " >  
+                        <div class="row"  style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                          <div class="col-sm-6 search1 ">
                            <label class="col-sm-5">Date From:</label>
                            <div class="col-sm-9">
@@ -96,7 +96,7 @@ if (strlen($_SESSION['damsid']==0)) {
                            </div>
                          </div>
                        </div>   
-                        <div class="row">
+                        <div class="row"  style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
                          <div class="col-sm-6 search1">
                            <label class="col-sm-5">Date To:</label>
                            <div class="col-sm-9">
@@ -114,7 +114,7 @@ if (strlen($_SESSION['damsid']==0)) {
                            <label class="col-sm-3"></label>
                            <div class="col-sm-9">
                             <br>
-                              <input type="submit" name="submit" class="btn btn-success">
+                            <input type="submit" name="submit" class="btn btn-primary">
                            </div>
                          </div>
                        </div>  
@@ -148,20 +148,18 @@ if (strlen($_SESSION['damsid']==0)) {
 <!-- Step 2: Display the sales report in a Bootstrap-styled table -->
 <div class="table-responsive">
 <?php
-include_once('db_connection.php'); // Include your database connection
+include_once('db_connection.php');
 
 if(isset($_POST['submit'])) {
     $dateFrom = $_POST['date_from'];
     $dateTo = $_POST['date_to'];
 
-    // Check if both date fields are not empty
     if (!empty($dateFrom) && !empty($dateTo)) {
-        // Query to retrieve data within the selected date range and join with services table
-        $sql = "SELECT sv.servicename, sv.price, COUNT(sr.Service) AS totalPatients, SUM(sv.price) AS totalSales
-                FROM sales_report sr
-                INNER JOIN services sv ON sr.Service = sv.id
-                WHERE sr.Date BETWEEN '$dateFrom' AND '$dateTo'
-                GROUP BY sr.Service";
+        $sql = "SELECT sv.servicename, sv.price, COUNT(DISTINCT sr.ID) AS totalPatients, SUM(sv.price) AS totalSales
+        FROM sales_report sr
+        INNER JOIN services sv ON sr.Service = sv.id
+        WHERE sr.Date BETWEEN '$dateFrom' AND '$dateTo'
+        GROUP BY sr.Service";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -200,10 +198,10 @@ if(isset($_POST['submit'])) {
             echo '</tfoot>';
             echo '</table>';
             
-            // Add a button to generate PDF
             echo '<form method="post" action="salesReportPDF.php" target="_blank">';
 echo '<input type="hidden" name="data" value=\'' . htmlspecialchars(json_encode($data)) . '\'>';
-echo '<button type="submit" class="btn btn-primary">Generate PDF</button>';
+
+echo '<center><br><button type="submit" class="btn btn-primary">Generate PDF</button></center>';
 echo '</form>';
         } else {
             echo "No results found.";

@@ -19,6 +19,9 @@
                                 <a class="nav-link" href="#about">About</a>
                             </li>
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="#services">Services</a>
+                            </li>
                            
 
                             <a href="index.php"><img src="images/Halipa eme.png" width="170px" height="55px"></a>

@@ -118,7 +118,7 @@ if (strlen($_SESSION['damsid']==0)) {
 			?>
 			<div class="row1 ">
 			<?php if ($isAdminUser) : ?>
-				<a href="#addnew" data-toggle="modal" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New</a>
+				<a href="#addnew" data-toggle="modal" class="btn btn-primary"><span></span> New</a>
 				<a href="#serviceSales" data-toggle="modal" class="btn btn-primary">Total Sales</a>
 				<a href='#viewReportModal' data-toggle='modal' class='btn btn-primary'>View Report</a>
         				<?php endif; ?>
@@ -142,7 +142,8 @@ if (strlen($_SESSION['damsid']==0)) {
 						<th>Description</th>
 						<th>Price</th>
                         <?php if ($isAdminUser) : ?>
-							<th>Action</th>
+							<th>Edit</th>
+							<th>Delete</th>
         				<?php endif; ?>
                         <!-- <th>Report</th> -->
 						
@@ -168,6 +169,7 @@ if (strlen($_SESSION['damsid']==0)) {
 										echo "<td>
 										<a href='#edit_".$row['id']."' class='btn btn-success btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-edit'></span> Edit</a>
                                         <br>
+										<td>
 										<a href='#delete_".$row['id']."' class='btn btn-danger btn-sm' data-toggle='modal'><span class='glyphicon glyphicon-trash'></span> Delete</a>
 										</td>";
 									}

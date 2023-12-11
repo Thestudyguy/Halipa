@@ -13,7 +13,7 @@ if (strlen($_SESSION['damsid']==0)) {
 <html lang="en">
 <head>
 	
-	<title>Cancelled Appointment</title>
+	<title>Decline Appointment</title>
 	
 	<link rel="stylesheet" href="libs/bower/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="libs/bower/material-design-iconic-font/dist/css/material-design-iconic-font.css">
@@ -52,7 +52,7 @@ if (strlen($_SESSION['damsid']==0)) {
 			<div class="col-md-12">
 				<div class="widget">
 					<header class="widget-header">
-						<h4 class="widget-title">CANCELLED APPOINTMENT</h4>
+						<h4 class="widget-title">DECLINE APPOINTMENT</h4>
 					</header><!-- .widget-header -->
 					<hr class="widget-separator">
 					<div class="widget-body">
@@ -69,7 +69,7 @@ if (strlen($_SESSION['damsid']==0)) {
 										<th>Time</th>
 										<th>Service</th>
 									<th>Status</th>
-										<th>Action</th>
+										<th>View</th>
 										
 									</tr>
 								</thead>
@@ -107,7 +107,7 @@ foreach($results as $row)
                   </td>
                   <?php } ?>             
                  
-										<td><a href="view-appointment-detail.php?editid=<?php echo htmlentities ($row->ID);?>&&aptid=<?php echo htmlentities ($row->AppointmentNumber);?>" class="btn btn-primary">View</a></td>
+										<td><center><a href="view-appointment-detail.php?editid=<?php echo htmlentities ($row->ID);?>&&aptid=<?php echo htmlentities ($row->AppointmentNumber);?>" class="btn btn-primary btn-sm"><span class='glyphicon glyphicon-search'></span> View</a></td>
 										
 									</tr>
 								 <?php $cnt=$cnt+1;}} ?> 

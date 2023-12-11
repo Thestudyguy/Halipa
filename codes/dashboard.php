@@ -68,7 +68,7 @@ if (strlen($_SESSION['damsid']==0)) {
 						<span class="pull-right big-icon watermark"><i class="fa fa-paperclip"></i></span>
 					</div>
 					<footer class="widget-footer bg-warning">
-						<a href="new-appointment.php"><small> View Detail</small></a>
+					<?php if ($isAdminUser) : ?><a href="new-appointment.php"><small> View Detail</small></a><?php endif; ?>
 						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[4,3,5,2,1], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
 					</footer>
 				</div><!-- .widget -->
@@ -92,7 +92,7 @@ $totappapt=$query->rowCount();
 						<span class="pull-right big-icon watermark"><i class="fa fa-unlock-alt"></i></span>
 					</div>
 					<footer class="widget-footer bg-success">
-						<a href="approved-appointment.php"><small> View Detail</small></a>
+					<?php if ($isAdminUser) : ?><a href="approved-appointment.php"><small> View Detail</small></a><?php endif; ?>
 						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[1,2,3,5,4], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
 					</footer>
 				</div><!-- .widget -->
@@ -111,12 +111,12 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 $totncanapt=$query->rowCount();
 ?>
 							<h3 class="widget-title text-danger"><span class="counter" data-plugin="counterUp"><?php echo htmlentities($totncanapt);?></span></h3>
-							<small class="text-color">Cancelled Appointment</small>
+							<small class="text-color">Decline Appointment</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-ban"></i></span>
 					</div>
 					<footer class="widget-footer bg-danger">
-						<a href="cancelled-appointment.php"><small> View Detail</small></a>
+					<?php if ($isAdminUser) : ?><a href="cancelled-appointment.php"><small> View Detail</small></a><?php endif; ?>
 						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[2,4,3,4,3], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
 					</footer>
 				</div><!-- .widget -->
@@ -140,8 +140,9 @@ $totapt=$query->rowCount();
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-file-text-o"></i></span>
 					</div>
+					
 					<footer class="widget-footer bg-primary">
-						<a href="all-appointment.php"><small> View Detail</small></a>
+					<?php if ($isAdminUser) : ?><a href="all-appointment.php"><small> View Detail</small></a><?php endif; ?>
 						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[5,4,3,5,2],{ type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
 					</footer>
 				</div><!-- .widget -->
