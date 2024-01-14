@@ -44,10 +44,10 @@ foreach ($results as $row) {
     </button>
 
     <a href="dashboard.php" class="navbar-brand">
-     <img src="images/halipagray.png" width="150px" height="50px"></a>
+     <img src="images/halipagray.png" width="150px" height="50px" alt='logo here'></a>
       
       
-     
+      
     </a>
   </div><!-- .navbar-header -->
   

@@ -13,6 +13,9 @@ if (isset($_POST['data'])) {
     
     $pdf->AddPage();
     
+    $imagePath = 'C:\xampp\htdocs\halipa\images\logo.png';
+    $pdf->Image($imagePath, 15, $pdf->GetY(), 30); 
+
     $pdf->SetFont('times', '', 12);
     $formattedInvoiceDate = date('F j, Y', strtotime($data['InvoiceDate']));
     

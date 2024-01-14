@@ -24,7 +24,7 @@
                             </li>
                            
 
-                            <a href="index.php"><img src="images/Halipa eme.png" width="170px" height="55px"></a>
+                            <a href="index.php"><img src="images/Halipa eme.png" width="170px" height="55px" alt='logo here'></a>
                                 
 
                             <li class="nav-item">

@@ -111,7 +111,7 @@ $results=$query->fetchAll(PDO::FETCH_OBJ);
 $totncanapt=$query->rowCount();
 ?>
 							<h3 class="widget-title text-danger"><span class="counter" data-plugin="counterUp"><?php echo htmlentities($totncanapt);?></span></h3>
-							<small class="text-color">Decline Appointment</small>
+							<small class="text-color">Declined Appointment</small>
 						</div>
 						<span class="pull-right big-icon watermark"><i class="fa fa-ban"></i></span>
 					</div>
@@ -144,6 +144,46 @@ $totapt=$query->rowCount();
 					<footer class="widget-footer bg-primary">
 					<?php if ($isAdminUser) : ?><a href="all-appointment.php"><small> View Detail</small></a><?php endif; ?>
 						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[5,4,3,5,2],{ type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
+					</footer>
+				</div><!-- .widget -->
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div class="widget stats-widget">
+					<div class="widget-body clearfix">
+								<?php 
+							$sql = "SELECT * FROM add_medicine WHERE quantity <= 0";
+							$query = $conn->query($sql);
+							$totOutOfStock = $query->num_rows;
+						?>
+						<div class="pull-left">
+							<h3 class="widget-title text-info"><span class="counter" data-plugin="counterUp"><?php echo htmlentities($totOutOfStock);?></span></h3>
+							<small class="text-color">Out of Stock Materials</small>
+						</div>
+						<span class="pull-right big-icon watermark"><i class="fa fa-paperclip"></i></span>
+					</div>
+					<footer class="widget-footer bg-info">
+					<?php if ($isAdminUser) : ?><a href="new-appointment.php"><small> View Detail</small></a><?php endif; ?>
+						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[4,3,5,2,1], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
+					</footer>
+				</div><!-- .widget -->
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div class="widget stats-widget">
+					<div class="widget-body clearfix">
+					<?php 
+                $sql = "SELECT * FROM add_medicine WHERE expirationdate < CURRENT_DATE() AND quantity > 0";
+                $query = $conn->query($sql);
+                $totExpired = $query->num_rows;
+            ?>
+						<div class="pull-left">
+							<h3 class="widget-title text-light"><span class="counter" data-plugin="counterUp"><?php echo htmlentities($totExpired);?></span></h3>
+							<small class="text-color">Expired Materials</small>
+						</div>
+						<span class="pull-right big-icon watermark"><i class="fa fa-paperclip"></i></span>
+					</div>
+					<footer class="widget-footer bg-dark">
+					<?php if ($isAdminUser) : ?><a href="new-appointment.php"><small> View Detail</small></a><?php endif; ?>
+						<span class="small-chart pull-right" data-plugin="sparkline" data-options="[4,3,5,2,1], { type: 'bar', barColor: '#ffffff', barWidth: 5, barSpacing: 2 }"></span>
 					</footer>
 				</div><!-- .widget -->
 			</div>

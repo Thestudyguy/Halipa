@@ -7,7 +7,7 @@ if(isset($_POST['submit'])) {
     $mobnum = $_POST['phone'];
     $email = $_POST['email'];
     $appdate = $_POST['date'];
-    $apptime = $_POST['time']; // Assuming time is in "H:mm AM/PM" format
+    $apptime = $_POST['time'];
     $specialization = $_POST['specialization'];
     $message = $_POST['message'];
     $aptnumber = mt_rand(100000000, 999999999);
@@ -59,7 +59,7 @@ if(isset($_POST['submit'])) {
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Halipa Dental Clinic</title>
+        <title>Halipa</title>
         <!-- CSS FILES -->        
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         
@@ -110,7 +110,6 @@ $("#doctorlist").html(data);
        <div class="row min-vh-100 align-items-center">
           <div class="content text-center text-md-left">
              <h3>Seeing your patient smile is one of the greatest happiness a dentist can have.</h3>
-             
           </div>
        </div>
  
@@ -128,7 +127,7 @@ $("#doctorlist").html(data);
        <div class="row align-items-center">
  
           <div class="col-md-6 image">
-             <img src="images/halipa1.jpg" class="w-100 mb-5 mb-md-0" alt="">
+             <img src="images/halipa1.jpg" class="w-100 mb-5 mb-md-0" alt="image here">
           </div>
  
           <div class="col-md-6 content">
@@ -138,7 +137,6 @@ $("#doctorlist").html(data);
                With a team of experienced dentists, the clinic offers a range of treatments and procedures to address various dental needs. 
                Whether it's routine check-ups, dental cleanings, or more advanced procedures, Halipa Dental Clinic aims to deliver high-quality 
                and personalized care to its patients. For more information about the clinic and its services.</p>
-             
           </div>
  
        </div>
@@ -150,7 +148,7 @@ $("#doctorlist").html(data);
 <!-- services section start  -->
 <section class="services" id="services">
 
-    <h1 class="heading">our services</h1>
+    <h1 class="heading">Services</h1>
     <div class="box-container container">
     <?php
     $sql = "SELECT servicename, description, price FROM services";
@@ -165,7 +163,7 @@ $("#doctorlist").html(data);
             ?>
             <img src="images/<?php echo strtolower(str_replace(' ', '', $service['servicename'])); ?>.png" alt="">
             <h3><?php echo htmlentities($service['servicename']); ?></h3>
-            <p>Price: ₱<?php echo number_format($service['price'], 2); ?></p>
+            <!-- <p>Price: ₱<?php echo number_format($service['price'], 2); ?></p> -->
             <p><?php echo htmlentities($service['description']); ?></p>
         </div>
     <?php
@@ -222,7 +220,7 @@ $("#doctorlist").html(data);
 </p>
        </div>
  
-    </div> -->
+    </div>
  
  </section>
 <!-- services section end -->
@@ -234,7 +232,7 @@ $("#doctorlist").html(data);
     <div class="box-container container">
  
        <div class="box">
-          <img src="images/process1.jpg" width="150px" height="60px">
+          <img src="images/process1.jpg" width="150px" height="60px" alt='image here'>
           <h3>Cosmetic Dentistry</h3>
           <p>Offers a range of cosmetic treatments to provide patients with a smile makeover that enhances functionality and aesthetics. 
             Services include teeth whitening, reshaping, bonding, porcelain veneers, crowns, and gum grafts. 
@@ -242,18 +240,18 @@ $("#doctorlist").html(data);
        </div>
  
        <div class="box">
-          <img src="images/process2.jpg" width="150px" height="60px">
+          <img src="images/process2.jpg" width="150px" height="60px" alt='image here'>
           <h3>Pediatric Dentistry</h3>
           <p>We don’t only provide treatments to improve the dental health of children. Our team welcomingly encourages kids to care for their teeth and orient them properly 
             to eliminate the fear of dentists and dental procedures.</p>
        </div>
  
        <div class="box">
-          <img src="images/process3.png" width="150px" height="60px">
+          <img src="images/process3.png" width="150px" height="60px" alt='image here'>
           <h3>Dental Implants</h3>
           <p>Dental implants are root device made of titanium used to replace missing teeth, not just on the surface like regular false teeth but 
             implanted deep into the gums to truly resemble real teeth. </p>
-       </div>
+        </div>
  
     </div>
  
@@ -338,37 +336,37 @@ while($row =$stmt->fetch()) {
           
         </main>
 <!-- footer section start  -->
-        <section class="footer" id="footer">
+<section class="footer" id="footer">
 
-   <div class="box-container container">
+<div class="box-container container">
 
-      <div class="box">
-      <i class='bx bx-phone' ></i>
-         <h3>Phone Number</h3>
-         <p>0909 119 8270</p>
-         <p>0967 543 4304</p>
-      </div>
-      <div class="box">
-      
-         <a href="https://www.google.com/maps/place/Halipa+Dental+Clinic/@7.3000886,125.6826693,19z/data=!3m1!4b1!4m6!3m5!1s0x32f945ca8c50d2df:0xff89c623c1e8760!8m2!3d7.3000873!4d125.683313!16s%2Fg%2F11lg460fss"><i class='bx bx-current-location' ></i></a>
-         
-         <h3>Address</h3>
-         <p>Door1, 2nd floor, Barrios Bldg. Quezon St., New Pandan, Panabo City</p>
-      </div>
-      <div class="box">
-         <a href="https://www.facebook.com/HalipaDentalClinic"><i class='bx bxl-facebook'></i></a>
-         <h3>Facebook</h3>
-         <p>Facebook.com/HalipaDentalClinic</p>
-         
-      </div>
-      <div class="box">
-      <i class='bx bx-time-five'></i>
-         <h3>Business Hours</h3>
-         <p>Monday to Saturday
-            8:00 AM – 5:00 PM
-          </p>
-      </div>
+   <div class="box">
+   <i class='bx bx-phone' ></i>
+      <h3>Phone Number</h3>
+      <p>0909 119 8270</p>
+      <p>0967 543 4304</p>
    </div>
+   <div class="box">
+   
+      <a href="https://www.google.com/maps/place/Halipa+Dental+Clinic/@7.3000886,125.6826693,19z/data=!3m1!4b1!4m6!3m5!1s0x32f945ca8c50d2df:0xff89c623c1e8760!8m2!3d7.3000873!4d125.683313!16s%2Fg%2F11lg460fss"><i class='bx bx-current-location' ></i></a>
+      
+      <h3>Address</h3>
+      <p>Door1, 2nd floor, Barrios Bldg. Quezon St., New Pandan, Panabo City</p>
+   </div>
+   <div class="box">
+      <a href="https://www.facebook.com/HalipaDentalClinic"><i class='bx bxl-facebook'></i></a>
+      <h3>Facebook</h3>
+      <p>Facebook.com/HalipaDentalClinic</p>
+      
+   </div>
+   <div class="box">
+   <i class='bx bx-time-five'></i>
+      <h3>Business Hours</h3>
+      <p>Monday to Saturday
+         8:00 AM – 5:00 PM
+       </p>
+   </div>
+</div>
 </section>
 </main>
 
